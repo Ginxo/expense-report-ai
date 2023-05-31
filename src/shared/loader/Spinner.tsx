@@ -1,7 +1,7 @@
-import { Spin } from 'antd';
+import { Spin } from "antd";
 import React from "react";
 import "./PageLoader.css";
-import { SpinnerIcon } from './SpinnerIcon';
+import { SpinnerIcon } from "./SpinnerIcon";
 
 interface ISpinner {
     size?: number
@@ -9,5 +9,5 @@ interface ISpinner {
 }
 
 export const Spinner: React.FC<ISpinner> = ({ size = 48, spin = true }) => {
-    return <Spin indicator={<SpinnerIcon size={size} spin={spin} />} />
+    return <Spin indicator={<SpinnerIcon size={size} spin={spin} />} />;
 };

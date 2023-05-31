@@ -1,13 +1,13 @@
 import {
     ReloadOutlined
-} from '@ant-design/icons';
-import { Button, Col, Row, Table, Tooltip } from 'antd';
-import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
-import type { FilterValue } from 'antd/es/table/interface';
-import Title from 'antd/es/typography/Title';
-import qs from 'qs';
-import React, { useEffect, useState } from 'react';
-import { SpinnerIcon } from '../../shared/loader/SpinnerIcon';
+} from "@ant-design/icons";
+import { Button, Col, Row, Table, Tooltip } from "antd";
+import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
+import type { FilterValue } from "antd/es/table/interface";
+import Title from "antd/es/typography/Title";
+import qs from "qs";
+import React, { useEffect, useState } from "react";
+import { SpinnerIcon } from "../../shared/loader/SpinnerIcon";
 interface DataType {
     id: number;
     description: string;
@@ -29,32 +29,32 @@ const categories = ["", "COMIDA", "GASTOS DE CASA"]; // TODO
 
 const columns: ColumnsType<DataType> = [
     {
-        title: 'Id',
-        dataIndex: 'id',
+        title: "Id",
+        dataIndex: "id",
         sorter: true,
-        width: '20%',
+        width: "20%",
     },
     {
-        title: 'Concept',
-        dataIndex: 'description',
+        title: "Concept",
+        dataIndex: "description",
         sorter: true,
-        width: '40%',
+        width: "40%",
     },
     {
-        title: 'Category',
-        dataIndex: 'idCategory',
+        title: "Category",
+        dataIndex: "idCategory",
         filters: [
-            { text: 'Comida', value: '1' },
-            { text: 'Gastos de Casa', value: '2' },
+            { text: "Comida", value: "1" },
+            { text: "Gastos de Casa", value: "2" },
         ],
         render: value => categories[value],
-        width: '20%',
+        width: "20%",
     },
     {
-        title: 'Amount',
-        dataIndex: 'amount',
+        title: "Amount",
+        dataIndex: "amount",
         sorter: true,
-        width: '20%',
+        width: "20%",
     },
 ];
 
@@ -80,7 +80,7 @@ const ExpenseList: React.FC = () => {
     const fetchData = () => {
         setLoading(true);
         fetch(`${process.env.REACT_APP_LAMBDA_GET_EXPENSES}?${qs.stringify(getTableParams(tableParams))}`)
-            .then((res) => res.json())
+            .then(res => res.json())
             .then(response => {
                 setData(response.Items);
                 setLoading(false);
@@ -102,7 +102,7 @@ const ExpenseList: React.FC = () => {
     const handleTableChange = (
         pagination: TablePaginationConfig,
         filters: Record<string, FilterValue | null>,
-        sorter: any
+        sorter: unknown
     ) => {
         const tempTableParams = {
             pagination,
@@ -135,7 +135,7 @@ const ExpenseList: React.FC = () => {
                 <Col span={24}>
                     <Table
                         columns={columns}
-                        rowKey={(record) => record.id}
+                        rowKey={record => record.id}
                         dataSource={data}
                         pagination={tableParams.pagination}
                         loading={loading ? { indicator: <SpinnerIcon size={48} spin={true} /> } : false}

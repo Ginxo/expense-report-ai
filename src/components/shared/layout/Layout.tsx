@@ -2,19 +2,19 @@ import {
     DashboardOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined
-} from '@ant-design/icons';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Layout as AntdLayout, Breadcrumb, Button, Col, Image, Menu, Row, theme } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import WindowsState from '../../../shared/hooks/windowsState';
-import UserMenu from './UserMenu';
+} from "@ant-design/icons";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Layout as AntdLayout, Breadcrumb, Button, Col, Image, Menu, Row, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import WindowsState from "../../../shared/hooks/windowsState";
+import UserMenu from "./UserMenu";
 
 const { Header, Sider, Content } = AntdLayout;
 
 interface ILayout {
     breadCrumb?: string[]
-    children: any;
+    children: unknown;
 }
 
 const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
@@ -27,7 +27,7 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
 
     const { width } = WindowsState();
 
-    let location = useLocation();
+    const location = useLocation();
     const [current, setCurrent] = useState(
         location.pathname === "/" || location.pathname === ""
             ? "/dashboard"
@@ -39,9 +39,9 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
         }
     }, [location, current]);
 
-    useEffect(() => setCollapsed((width < 800) === true), [width])
+    useEffect(() => setCollapsed((width < 800) === true), [width]);
 
-    function handleClick(e: any) {
+    function handleClick(e: unknown) {
         setCurrent(e.key);
     }
 
@@ -65,7 +65,7 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
                         : null}
 
                 </Sider>
-                <AntdLayout style={{ padding: '0 24px 24px' }}>
+                <AntdLayout style={{ padding: "0 24px 24px" }}>
                     <Header style={{ padding: 0, background: colorBgContainer, margin: "16px 0px" }}>
                         <Row>
                             <Col key="colCollapse">
@@ -74,21 +74,21 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
                                     icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                                     onClick={() => setCollapsed(!collapsed)}
                                     style={{
-                                        fontSize: '16px',
+                                        fontSize: "16px",
                                         width: 64,
                                         height: 64,
                                     }}
                                 />
                             </Col>
                             <Col key="colBreadcrumb">
-                                <Breadcrumb style={{ margin: '20px 16px' }} items={breadCrumb ? breadCrumb.map(e => ({ title: e })) : []} />
+                                <Breadcrumb style={{ margin: "20px 16px" }} items={breadCrumb ? breadCrumb.map(e => ({ title: e })) : []} />
                             </Col>
                         </Row>
                         <></>
                     </Header>
                     <Content
                         style={{
-                            margin: '0px',
+                            margin: "0px",
                             padding: 24,
                             minHeight: 280,
                             background: colorBgContainer,

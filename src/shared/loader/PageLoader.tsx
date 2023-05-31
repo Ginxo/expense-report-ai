@@ -1,10 +1,10 @@
 import {
   LoadingOutlined
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 import React from "react";
 import "./PageLoader.css";
-import { Spin } from 'antd';
-import Layout from '../../components/shared/layout/Layout';
+import { Spin } from "antd";
+import Layout from "../../components/shared/layout/Layout";
 
 export const PageLoader: React.FC = () => {
   return (

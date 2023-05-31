@@ -10,14 +10,14 @@ const WindowsState = () => {
             setWindowSize([window.innerWidth, window.innerHeight]);
         };
 
-        window.addEventListener('resize', handleWindowResize);
+        window.addEventListener("resize", handleWindowResize);
 
         return () => {
-            window.removeEventListener('resize', handleWindowResize);
+            window.removeEventListener("resize", handleWindowResize);
         };
     }, []);
 
     return { width: windowSize[0], height: windowSize[1] };
-}
+};
 
 export default WindowsState;

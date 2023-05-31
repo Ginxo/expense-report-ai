@@ -12,11 +12,11 @@ export const App: React.FC = () => {
   useEffect(() => {
     if (isAuthenticated) {
       messageApi.open({
-        type: 'success',
-        content: 'Already authenticated',
+        type: "success",
+        content: "Already authenticated",
       });
     }
-  }, [isAuthenticated, messageApi])
+  }, [isAuthenticated, messageApi]);
 
   return (
     <>
