@@ -101,13 +101,11 @@ const ExpenseList: React.FC = () => {
 
     const handleTableChange = (
         pagination: TablePaginationConfig,
-        filters: Record<string, FilterValue | null>,
-        sorter: unknown
+        filters: Record<string, FilterValue | null>
     ) => {
         const tempTableParams = {
             pagination,
-            filters,
-            ...sorter,
+            filters
         };
         setTableParams(tempTableParams);
         setTableParamsJson(JSON.stringify(tempTableParams));
@@ -139,7 +137,7 @@ const ExpenseList: React.FC = () => {
                         dataSource={data}
                         pagination={tableParams.pagination}
                         loading={loading ? { indicator: <SpinnerIcon size={48} spin={true} /> } : false}
-                        onChange={(pagination, filters, sorter) => handleTableChange(pagination, filters, sorter)}
+                        onChange={(pagination, filters) => handleTableChange(pagination, filters)}
                     />
                 </Col>
             </Row>
