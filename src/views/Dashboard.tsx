@@ -1,11 +1,11 @@
-import React from 'react';
-import Layout from '../components/shared/layout/Layout';
-import ExpenseList from '../components/expenses/ExpenseList';
+import React from "react";
+import Layout from "../components/shared/layout/Layout";
+import ExpenseList from "../components/expenses/ExpenseList";
 
 const Dashboard: React.FC = () => {
 
   return (
-    <Layout breadCrumb={['', 'Dashboard']}>
+    <Layout breadCrumb={["", "Dashboard"]}>
       <ExpenseList />
     </Layout>
   );

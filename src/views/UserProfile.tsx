@@ -1,12 +1,12 @@
-import { Card, Col, Descriptions, Row, Skeleton, Tooltip } from 'antd';
-import React from 'react';
-import Layout from '../components/shared/layout/Layout';
-import UserAvatar from '../components/shared/UserAvatar';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Card, Col, Descriptions, Row, Skeleton, Tooltip } from "antd";
+import React from "react";
+import Layout from "../components/shared/layout/Layout";
+import UserAvatar from "../components/shared/UserAvatar";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 const UserProfile: React.FC = () => {
 

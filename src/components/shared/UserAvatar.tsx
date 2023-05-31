@@ -1,7 +1,7 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { Avatar } from 'antd';
-import SkeletonAvatar from 'antd/es/skeleton/Avatar';
-import React from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
+import { Avatar } from "antd";
+import SkeletonAvatar from "antd/es/skeleton/Avatar";
+import React from "react";
 
 interface IUserAvatar {
     reponsive?: boolean;
@@ -15,7 +15,7 @@ const UserAvatar: React.FC<IUserAvatar> = ({ reponsive = true, size = 48 }) => {
     return (
         !isLoading && isAuthenticated && user ?
             <Avatar size={reponsive ? avatarResponsiveSize : size} src={user.picture} />
-            : <SkeletonAvatar size={size} active style={{ backgroundColor: '#bfbfbf' }} />
+            : <SkeletonAvatar size={size} active style={{ backgroundColor: "#bfbfbf" }} />
     );
 };
 

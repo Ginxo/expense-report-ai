@@ -10,7 +10,7 @@ const Logout: React.FC = () => {
         logoutParams: {
             returnTo: window.location.origin,
         },
-    }), [logout])
+    }), [logout]);
 
     useEffect(() => {
         setTimeout(() => {
