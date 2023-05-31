@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Layout as AntdLayout, Breadcrumb, Button, Col, Image, Menu, Row, theme } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import WindowsState from "../../../shared/hooks/windowsState";
 import UserMenu from "./UserMenu";
@@ -14,7 +14,7 @@ const { Header, Sider, Content } = AntdLayout;
 
 interface ILayout {
     breadCrumb?: string[]
-    children: unknown;
+    children: ReactNode;
 }
 
 const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
@@ -41,10 +41,6 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
 
     useEffect(() => setCollapsed((width < 800) === true), [width]);
 
-    function handleClick(e: unknown) {
-        setCurrent(e.key);
-    }
-
     return (
         <AntdLayout style={{ height: "100vh" }}>
             <Header style={{ padding: "0px", margin: "0px" }}>
@@ -60,7 +56,7 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
             <AntdLayout>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     {isAuthenticated ?
-                        <Menu theme="dark" mode="inline" onClick={e => handleClick(e)}
+                        <Menu theme="dark" mode="inline" onClick={e => setCurrent(e.key)}
                             items={[{ key: "/dashboard", icon: <DashboardOutlined />, label: (<Link to="/dashboard">Dashboard</Link>) }]} />
                         : null}
 
