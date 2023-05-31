@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./App.css";
-import RoutesTree from "./components/RoutesTree";
+import RoutesTree from "./components/shared/routes/RoutesTree";
+import { message } from "antd";
+import { useEffect } from "react";
+import { PageLoader } from "./shared/loader/PageLoader";
 
-interface IApp { }
-
-const App = (props: IApp) => {
-  const [basename, setBasename] = useState("");
+export const App: React.FC = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const { isLoading, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    setBasename(`/${window.location.pathname.split("/")[1]}`);
-  }, []);
+    console.log("isAuthenticated", isAuthenticated)
+    if (isAuthenticated) {
+      messageApi.open({
+        type: 'success',
+        content: 'Already authenticated',
+      });
+    }
+  }, [isAuthenticated, messageApi])
 
   return (
-    <Router basename={basename}>
-      <RoutesTree />
-    </Router>
-  );
+    <>
+      {contextHolder}
+      {isLoading ? <PageLoader /> : <RoutesTree />}
+    </>);
 };
 
 export default App;

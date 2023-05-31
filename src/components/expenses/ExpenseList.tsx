@@ -7,6 +7,7 @@ import type { FilterValue } from 'antd/es/table/interface';
 import Title from 'antd/es/typography/Title';
 import qs from 'qs';
 import React, { useEffect, useState } from 'react';
+import { SpinnerIcon } from '../../shared/loader/SpinnerIcon';
 interface DataType {
     id: number;
     description: string;
@@ -76,7 +77,6 @@ const ExpenseList: React.FC = () => {
     });
     const [tableParamsJson, setTableParamsJson] = useState<string>(JSON.stringify(tableParams));
 
-
     const fetchData = () => {
         setLoading(true);
         fetch(`${process.env.REACT_APP_LAMBDA_GET_EXPENSES}?${qs.stringify(getTableParams(tableParams))}`)
@@ -138,7 +138,7 @@ const ExpenseList: React.FC = () => {
                         rowKey={(record) => record.id}
                         dataSource={data}
                         pagination={tableParams.pagination}
-                        loading={loading}
+                        loading={loading ? { indicator: <SpinnerIcon size={48} spin={true} /> } : false}
                         onChange={(pagination, filters, sorter) => handleTableChange(pagination, filters, sorter)}
                     />
                 </Col>
