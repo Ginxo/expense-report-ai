@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import {
+    DashboardOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UserOutlined,
-    DashboardOutlined
+    MenuUnfoldOutlined
 } from '@ant-design/icons';
-import { Layout as AntdLayout, Menu, Button, theme, Breadcrumb, Col, Row, Image } from 'antd';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Layout as AntdLayout, Breadcrumb, Button, Col, Image, Menu, Row, theme } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import WindowsState from '../../../shared/hooks/windowsState';
+import UserMenu from './UserMenu';
 
 const { Header, Sider, Content } = AntdLayout;
 
@@ -16,7 +17,9 @@ interface ILayout {
     children: any;
 }
 
-const Layout: React.FC<ILayout> = props => {
+const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
+    const { isAuthenticated } = useAuth0();
+
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
@@ -49,16 +52,18 @@ const Layout: React.FC<ILayout> = props => {
                     <Col span={12}>
                         <Image height={60} src={`${process.env.PUBLIC_URL}/logo.png`} preview={false} />
                     </Col>
-                    <Col span={12}>
-                        <Menu theme="dark" mode="horizontal" onClick={e => handleClick(e)} style={{ flex: "auto", justifyContent: "flex-end" }}
-                            items={[{ key: "/profile", icon: <UserOutlined />, label: (<Link to="/profile"></Link>) }]} />
+                    <Col span={12} style={{ paddingRight: "32px" }}>
+                        <UserMenu />
                     </Col>
                 </Row>
             </Header>
             <AntdLayout>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
-                    <Menu theme="dark" mode="inline" onClick={e => handleClick(e)}
-                        items={[{ key: "/dashboard", icon: <DashboardOutlined />, label: (<Link to="/dashboard">Dashboard</Link>) }]} />
+                    {isAuthenticated ?
+                        <Menu theme="dark" mode="inline" onClick={e => handleClick(e)}
+                            items={[{ key: "/dashboard", icon: <DashboardOutlined />, label: (<Link to="/dashboard">Dashboard</Link>) }]} />
+                        : null}
+
                 </Sider>
                 <AntdLayout style={{ padding: '0 24px 24px' }}>
                     <Header style={{ padding: 0, background: colorBgContainer, margin: "16px 0px" }}>
@@ -76,7 +81,7 @@ const Layout: React.FC<ILayout> = props => {
                                 />
                             </Col>
                             <Col key="colBreadcrumb">
-                                <Breadcrumb style={{ margin: '20px 16px' }} items={props.breadCrumb ? props.breadCrumb.map(e => ({ title: e })) : []} />
+                                <Breadcrumb style={{ margin: '20px 16px' }} items={breadCrumb ? breadCrumb.map(e => ({ title: e })) : []} />
                             </Col>
                         </Row>
                         <></>
@@ -89,7 +94,7 @@ const Layout: React.FC<ILayout> = props => {
                             background: colorBgContainer,
                         }}
                     >
-                        {props.children}
+                        {children}
                     </Content>
                 </AntdLayout>
             </AntdLayout>

@@ -2,7 +2,6 @@
   "name": "expense-report-ai",
   "version": "0.0.1",
   "private": true,
-  "homepage": "https://github.com/Ginxo/expense-report-ai",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ginxo/expense-report-ai.git"
@@ -19,6 +18,7 @@
     "reactjs"
   ],
   "dependencies": {
+    "@auth0/auth0-react": "^2.1.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.4",
