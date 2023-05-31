@@ -10,7 +10,6 @@ export const App: React.FC = () => {
   const { isLoading, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    console.log("isAuthenticated", isAuthenticated)
     if (isAuthenticated) {
       messageApi.open({
         type: 'success',
