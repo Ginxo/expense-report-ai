@@ -42,7 +42,7 @@ const Layout: React.FC<ILayout> = ({ breadCrumb, children }) => {
     useEffect(() => setCollapsed((width < 800) === true), [width]);
 
     return (
-        <AntdLayout style={{ height: "100vh" }}>
+        <AntdLayout style={{ minHeight: "100vh", overflow: "auto" }}>
             <Header style={{ padding: "0px", margin: "0px" }}>
                 <Row>
                     <Col span={12}>
