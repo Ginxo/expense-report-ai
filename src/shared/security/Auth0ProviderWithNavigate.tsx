@@ -27,8 +27,12 @@ export const Auth0ProviderWithNavigate = ({
         <Auth0Provider
             domain={domain}
             clientId={clientId}
+            useRefreshTokens={true}
+            useRefreshTokensFallback={false}
             authorizationParams={{
                 redirect_uri: redirectUri,
+                audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
+                scope: "openid profile email offline_access"
             }}
             onRedirectCallback={onRedirectCallback}
         >

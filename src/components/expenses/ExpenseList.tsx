@@ -8,6 +8,7 @@ import Title from "antd/es/typography/Title";
 import qs from "qs";
 import React, { useEffect, useState } from "react";
 import { SpinnerIcon } from "../../shared/loader/SpinnerIcon";
+import Auth0Token from "../../shared/hooks/auth0Token";
 interface DataType {
     id: number;
     description: string;
@@ -33,6 +34,7 @@ const columns: ColumnsType<DataType> = [
         dataIndex: "id",
         sorter: true,
         width: "20%",
+        responsive: ["sm"],
     },
     {
         title: "Concept",
@@ -48,6 +50,7 @@ const columns: ColumnsType<DataType> = [
             { text: "Gastos de Casa", value: "2" },
         ],
         render: value => categories[value],
+        responsive: ["sm"],
         width: "20%",
     },
     {
@@ -76,10 +79,13 @@ const ExpenseList: React.FC = () => {
         },
     });
     const [tableParamsJson, setTableParamsJson] = useState<string>(JSON.stringify(tableParams));
+    const { token } = Auth0Token();
 
     const fetchData = () => {
         setLoading(true);
-        fetch(`${process.env.REACT_APP_LAMBDA_GET_EXPENSES}?${qs.stringify(getTableParams(tableParams))}`)
+        fetch(`${process.env.REACT_APP_LAMBDA_GET_EXPENSES}?${qs.stringify(getTableParams(tableParams))}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
             .then(res => res.json())
             .then(response => {
                 setData(response.Items);
@@ -97,7 +103,11 @@ const ExpenseList: React.FC = () => {
     };
 
     // eslint-disable-next-line
-    useEffect(() => fetchData(), [tableParamsJson]);
+    useEffect(() => {
+        if (token) {
+            fetchData();
+        }
+    }, [tableParamsJson, token]);
 
     const handleTableChange = (
         pagination: TablePaginationConfig,
