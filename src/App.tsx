@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import "./App.css";
-import RoutesTree from "./components/shared/routes/RoutesTree";
 import { message } from "antd";
 import { useEffect } from "react";
+import "./App.css";
+import RoutesTree from "./components/shared/routes/RoutesTree";
 import { PageLoader } from "./shared/loader/PageLoader";
 
 export const App: React.FC = () => {

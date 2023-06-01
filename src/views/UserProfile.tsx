@@ -5,12 +5,17 @@ import UserAvatar from "../components/shared/UserAvatar";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   CheckCircleTwoTone,
-  CloseCircleTwoTone
+  CloseCircleTwoTone,
+  EyeOutlined
 } from "@ant-design/icons";
+import Auth0Token from "../shared/hooks/auth0Token";
+import Paragraph from "antd/es/typography/Paragraph";
 
 const UserProfile: React.FC = () => {
 
   const { isLoading, user } = useAuth0();
+  const { token } = Auth0Token();
+
 
   return (
     <Layout breadCrumb={["", "user", "profile"]}>
@@ -38,13 +43,18 @@ const UserProfile: React.FC = () => {
                       second: "numeric"
                     }
                   )}</Descriptions.Item>
+                  <Descriptions.Item label="API Gateway Access Token">
+                    <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: < EyeOutlined /> }}>
+                      {token}
+                    </Paragraph>
+                  </Descriptions.Item>
                 </> : <Skeleton active />}
 
             </Descriptions>
           </Col>
         </Row>
       </Card>
-    </Layout>
+    </Layout >
   );
 };
 
